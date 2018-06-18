@@ -15,6 +15,10 @@ class Product
     @xsmall = xsmall.to_i
     @average = (@large + @medium + @small + @xsmall) / 4
   end
+
+  def remove_xsmall
+    remove_instance_variable(:@xsmall)
+  end
 end
 
 products_list = []
@@ -30,16 +34,17 @@ print products_list
 puts ''
 products_list.each do |product|
   puts "el producto #{product.name} tiene un precio promedio de #{product.average}"
-  puts product.xsmall.to_s.to_sym
 end
-def remove_item(array)
-  array.each do |x|
-    remove_instance_variable(x.xsmall.to_s.to_sym)
 
+def remove_size_xsmall(array)
+  array.each do |item|
+    item.remove_xsmall
   end
 end
 
-print remove_item(products_list)
+remove_size_xsmall(products_list)
+
+print products_list
 ## Se pide:
 ## Optimizar el codigo implementando el operador *splat*
 ## al momento de instanciar los productos
